@@ -20,6 +20,15 @@
 # product configuration (apps).
 #
 
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Inherit from pong device
+$(call inherit-product, device/oneplus/pong/device.mk)
+
+# Inherit some common TWRP stuff.
+$(call inherit-product, vendor/pb/config/common.mk)
+
 # Inherit from OEM SOC-common
 $(call inherit-product, $(COMMON_PATH)/device-common.mk)
 
