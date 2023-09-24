@@ -51,15 +51,11 @@ SHRP_MAINTAINER := PhatWalrus
 
 # Recovery Type (for "About" section only)
 # Default (if not set): N/A
-SHRP_REC_TYPE := Normal
+SHRP_REC_TYPE := Trebel
 
 # Device Type (for "About" section only)
 # Default (if not set): N/A
 SHRP_DEVICE_TYPE := A/B
-
-# Use this flag only if SHRP_REC is set
-# Default (if not set): N/A
-SHRP_HAS_RECOVERY_PARTITION := true
 
 # Use this flag only if your device is A/B or Virtual A/B.
 # Default (if not set): N/A
