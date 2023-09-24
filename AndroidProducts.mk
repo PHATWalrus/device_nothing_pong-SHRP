@@ -15,4 +15,5 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_pong.mk
+    $(LOCAL_DIR)/omni_pong.mk
+COMMON_LUNCH_CHOICES := omni_pong-eng
