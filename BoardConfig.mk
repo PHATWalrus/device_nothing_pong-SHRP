@@ -57,10 +57,6 @@ SHRP_REC_TYPE := Normal
 # Default (if not set): N/A
 SHRP_DEVICE_TYPE := A/B
 
-# Your device's recovery path, dont use blindly
-# Default (if not set): N/A
-SHRP_REC := /dev/block/bootdevice/by-name/recovery
-
 # Use this flag only if SHRP_REC is set
 # Default (if not set): N/A
 SHRP_HAS_RECOVERY_PARTITION := true
