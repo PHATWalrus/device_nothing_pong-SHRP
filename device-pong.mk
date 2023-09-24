@@ -24,7 +24,7 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 
 # Inherit from pong device
-$(call inherit-product, device/oneplus/pong/device.mk)
+$(call inherit-product, device/nothing/pong/device.mk)
 
 # Inherit some common TWRP stuff.
 $(call inherit-product, vendor/pb/config/common.mk)
