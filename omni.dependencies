@@ -1,7 +1,7 @@
 [
   {
-    "remote": "TeamWin",
-    "repository": "android_device_nothing_sm84xx-common",
+    "remote": "PHATWalrus",
+    "repository": "android_device_nothing_sm84xx-common-TWRP",
     "target_path": "device/nothing/sm84xx-common",
     "branch": "android-12.1"
   }
