@@ -2,7 +2,8 @@ language: generic
 dist: focal
 services:
   - docker
-
+vm:
+  size: x-large
 env:
   global:
     - MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb
@@ -37,7 +38,7 @@ script:
   - mkdir workspace && cd workspace
   - git config --global user.name "YourName"
   - git config --global user.email "youremail@example.com"
-  - repo init --depth=1 -u ${MANIFEST_URL} -b ${MANIFEST_BRANCH}
+  - repo init --depth=1 -u ${MANIFEST_URL} -b ${MANIFEST_BRANCH} -y
   - repo sync -j$(nproc --all) --force-sync
   - git clone ${DEVICE_TREE_URL} -b ${DEVICE_TREE_BRANCH} ./${DEVICE_PATH}
   - if [ -n "${COMMON_TREE_URL}" ] && [ -n "${COMMON_PATH}" ]; then git clone ${COMMON_TREE_URL} -b ${DEVICE_TREE_BRANCH} ./${COMMON_PATH}; fi
