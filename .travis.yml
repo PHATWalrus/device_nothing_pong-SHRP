@@ -1,0 +1,50 @@
+language: generic
+dist: focal
+services:
+  - docker
+
+env:
+  global:
+    - MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb
+    - MANIFEST_BRANCH=android-12.1
+    - DEVICE_TREE_URL=https://github.com/PHATWalrus/device_nothing_pong-SHRP
+    - DEVICE_TREE_BRANCH=android-12.1
+    - DEVICE_PATH=device/nothing/Pong
+    - COMMON_TREE_URL=https://github.com/PHATWalrus/device_nothing_sm84xx-common-TWRP
+    - COMMON_PATH=device/nothing/sm84xx-common
+    - DEVICE_NAME=Pong
+    - MAKEFILE_NAME=omni_Pong
+    - BUILD_TARGET=recovery
+
+before_install:
+  - sudo apt update
+  - sudo apt -y upgrade
+  - sudo apt -y install gperf gcc-multilib gcc-10-multilib g++-multilib g++-10-multilib libc6-dev lib32ncurses5-dev x11proto-core-dev libx11-dev tree lib32z-dev libgl1-mesa-dev libxml2-utils xsltproc bc ccache lib32readline-dev lib32z1-dev liblz4-tool libncurses5-dev libsdl1.2-dev libwxgtk3.0-gtk3-dev libxml2 lzop pngcrush schedtool squashfs-tools imagemagick libbz2-dev lzma ncftp qemu-user-static libstdc++-10-dev libncurses5 python3
+  - mkdir ~/bin
+  - curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+  - chmod a+x ~/bin/repo
+  - sudo ln -sf ~/bin/repo /usr/bin/repo
+
+script:
+  - echo "User Environment Variables"
+  - echo "Manifest URL: ${MANIFEST_URL}"
+  - echo "Manifest Branch: ${MANIFEST_BRANCH}"
+  - echo "Device Tree URL: ${DEVICE_TREE_URL}"
+  - echo "Device Tree Branch: ${DEVICE_TREE_BRANCH}"
+  - echo "Device Path: ${DEVICE_PATH}"
+  - echo "Device Name: ${DEVICE_NAME}"
+  - echo "Makefile Name: ${MAKEFILE_NAME}"
+  - echo "Build Target: ${BUILD_TARGET}.img"
+  - mkdir workspace && cd workspace
+  - git config --global user.name "YourName"
+  - git config --global user.email "youremail@example.com"
+  - repo init --depth=1 -u ${MANIFEST_URL} -b ${MANIFEST_BRANCH}
+  - repo sync -j$(nproc --all) --force-sync
+  - git clone ${DEVICE_TREE_URL} -b ${DEVICE_TREE_BRANCH} ./${DEVICE_PATH}
+  - if [ -n "${COMMON_TREE_URL}" ] && [ -n "${COMMON_PATH}" ]; then git clone ${COMMON_TREE_URL} -b ${DEVICE_TREE_BRANCH} ./${COMMON_PATH}; fi
+  - source build/envsetup.sh
+  - export ALLOW_MISSING_DEPENDENCIES=true
+  - lunch ${MAKEFILE_NAME}-eng && make clean && mka pbrp -j$(nproc --all)
+
+# Travis CI doesn't directly support uploading artifacts to GitHub Releases.
+# You might need to add a deploy step with a custom script or use an external service.
