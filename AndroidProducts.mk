@@ -15,5 +15,5 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_pong.mk
-COMMON_LUNCH_CHOICES := omni_pong-eng
+    $(LOCAL_DIR)/omni_Pong.mk
+COMMON_LUNCH_CHOICES := omni_Pong-eng
