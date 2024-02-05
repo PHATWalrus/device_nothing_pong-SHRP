@@ -2,8 +2,8 @@ language: generic
 dist: focal
 services:
   - docker
-vm:
-  size: x-large
+#vm:
+  #size: x-large
 env:
   global:
     - MANIFEST_URL=https://github.com/PitchBlackRecoveryProject/manifest_pb
